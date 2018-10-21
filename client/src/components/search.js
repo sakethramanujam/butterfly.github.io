@@ -1,4 +1,4 @@
-import Searchbar from material-ui-search-bar
+import Searchbar from 'material-ui-search-bar'
 
 
 render(){
@@ -8,8 +8,8 @@ render(){
     style={
         {
         margin: '0 auto',
-        maxWidth:150px;  
-        }
+        maxWidth: 150
+        };
     }/>
     )   
 }

@@ -16,4 +16,5 @@ export default class MapComp extends Component {
       this.map = undefined;
       this.container = undefined;
       this.tooltip = undefined;
-    }
+}
+}
