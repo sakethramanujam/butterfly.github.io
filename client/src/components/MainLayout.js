@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Switch from '@material-ui/core/Switch';
-import classNames from 'classnames';
 import WebLayout from './WebLayout';
 import VMLayout from "./VMLayout";
 
@@ -16,7 +15,7 @@ export default class MainLayout extends Component {
     }
 
     render () {
-        const { classes } = this.props;
+        // const { classes } = this.props;
         
         return (
             <div>

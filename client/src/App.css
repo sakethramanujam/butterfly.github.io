@@ -30,3 +30,19 @@
     transform: rotate(360deg);
   }
 }
+
+.pull-right {
+  right: 0;
+  margin-left: auto;
+}
+
+.WebLayout-noPadding-24 {
+  padding: 0 !important;
+}
+
+.Map {
+  padding-top: 4px;
+  position: relative !important;
+  width: 100%;
+  height: calc(70vh);
+}
