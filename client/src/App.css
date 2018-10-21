@@ -46,3 +46,9 @@
   width: 100%;
   height: calc(70vh);
 }
+
+/* .scroll-handle {
+  padding: 12px;
+  max-height: 600px;
+  overflow-y: scroll;
+} */

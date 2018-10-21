@@ -9,6 +9,7 @@ import LoginBtn from './LoginBtn';
 import SearchComp from './SearchComp';
 import MapComp from './MapComp';
 import CaseCard from './CaseCard';
+import LandingComp from './LandingComp';
 
 const styles = theme => ({
     menuButton: {
@@ -54,7 +55,7 @@ class WebLayout extends Component {
                     </div>);
         }
         else {
-            button = <LoginBtn onClick={this.handleLogin}/>;
+            button = <LoginBtn onClick= {this.handleLogin}/>;
         }
 
         return (
@@ -69,7 +70,8 @@ class WebLayout extends Component {
                         </div>
                     </Toolbar>
                 </AppBar>
-                <Grid container spacing={24}>
+                {!isLoggedIn ? (<LandingComp/>) :
+                (<Grid container spacing={24}>
                     <Grid item xs={6}>
                     <Card classes={classes.marT}>
                         <CardContent className={classes.noPadding}>
@@ -78,16 +80,20 @@ class WebLayout extends Component {
                     </Card>
                     <MapComp location={pos}/>
                     </Grid>
-                    <Grid item xs={5}>
+                    <Grid item xs={6}>
                         <Typography variant="h6">
                             List of cases available in your location:
                         </Typography>
-                        <CaseCard/>
-                        <CaseCard/>
-                        <CaseCard/>
-                        <CaseCard/>
+                        <div className="scroll-handle">
+                            <CaseCard/>
+                            <CaseCard/>
+                            <CaseCard/>
+                            <CaseCard/>
+                            <CaseCard/>
+                        </div>
                     </Grid>
-                </Grid>
+                </Grid>)
+                }
             </div>
         )
     }
