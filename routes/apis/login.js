@@ -29,7 +29,7 @@ return next({stattus:200,message:'success'})
 app.use((err, req, res, next) => {
   let errCode, errMessage
 
-  i f (err.errors) {
+  if (err.errors) {
     // mongoose validation error
     errCode = 400 // bad request
     const keys = Object.keys(err.errors)

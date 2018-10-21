@@ -9,7 +9,7 @@ render(){
         {
         margin: '0 auto',
         maxWidth: 150
-        };
+        }
     }/>
     )   
 }
