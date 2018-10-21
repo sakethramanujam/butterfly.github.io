@@ -70,7 +70,7 @@ class WebLayout extends Component {
                         </div>
                     </Toolbar>
                 </AppBar>
-                {!isLoggedIn ? (<LandingComp/>) :
+                {!isLoggedIn ? (<LandingComp onClick={this.handleLogin}/>) :
                 (<Grid container spacing={24}>
                     <Grid item xs={6}>
                     <Card classes={classes.marT}>

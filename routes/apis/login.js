@@ -11,25 +11,35 @@ app.use(cors())
 
 
 function logger(req, res, next) {
-console.log(req.method + ' ' + req.path + ' - ' + req.ip )
-next();
+  console.log(req.method + ' ' + req.path + ' - ' + req.ip)
+  next();
 }
 
-bodyparser.urlencoded({extended: false});
-app.use(bodyparser.urlencoded({extended: false}));
+bodyparser.urlencoded({
+  extended: false
+});
+app.use(bodyparser.urlencoded({
+  extended: false
+}));
 
 // Not found middleware
 app.use((req, res, next) => {
-    return next({status: 404, message: 'not found'})
+  return next({
+    status: 404,
+    message: 'not found'
   })
-app.use((req,res,next)=>{
-return next({stattus:200,message:'success'})
+})
+app.use((req, res, next) => {
+  return next({
+    stattus: 200,
+    message: 'success'
+  })
 })
 // Error Handling middleware
 app.use((err, req, res, next) => {
   let errCode, errMessage
 
-  i f (err.errors) {
+  if (err.errors) {
     // mongoose validation error
     errCode = 400 // bad request
     const keys = Object.keys(err.errors)

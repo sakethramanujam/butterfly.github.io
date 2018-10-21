@@ -62,7 +62,7 @@ class LandingComp extends Component {
                     margin="normal"
                     variant="outlined"
                     />
-                    <Button className={classes.button} color="primary"> Login </Button>
+                    <Button className={classes.button} color="primary" onClick={this.props.onClick}> Login </Button>
                 </form>
             </div>
         );
