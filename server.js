@@ -1,22 +1,35 @@
-// server.js
-// where your node app starts
-
-// init project
 const express = require('express');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+
+const cors = require('cors');
+require('dotenv').config();
+
 const app = express();
 
-// we've started you off with Express, 
-// but feel free to use whatever libs or frameworks you'd like through `package.json`.
+app.use(bodyParser.json());
+// app.use('/api', chickens);
+app.use(cors());
+// Database Config
+const db = process.env.MLAB_URI;
+const port = process.env.PORT || 5000;
 
-// http://expressjs.com/en/starter/static-files.html
-app.use(express.static('public'));
+// mongoose.connect(db, {
+//         useNewUrlParser: true
+//     })
+//     .then(() => {
+//         console.log("MongoDB connected 💾 😄");
+//     })
+//     .catch((err) => {
+//         console.log("Pssst!");
+//         console.log(err);
+//     });
 
-// http://expressjs.com/en/starter/basic-routing.html
-app.get('/', function(request, response) {
-  response.sendFile(__dirname + '/views/index.html');
-});
+app.get("/hello", (req, res) => {
+    res.send("Hello World");
+})
 
-// listen for requests :)
-const listener = app.listen(process.env.PORT, function() {
-  console.log('Your app is listening on port ' + listener.address().port);
+
+app.listen(port, () => {
+    console.log(`Server started on port ${port} 🔅 `);
 });
