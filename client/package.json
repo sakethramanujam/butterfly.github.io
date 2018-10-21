@@ -8,6 +8,7 @@
     "axios": "^0.18.0",
     "cors": "^2.8.4",
     "mapbox-gl": "^0.48.0",
+    "material-ui-search-bar": "^0.4.2",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-scripts": "1.1.5"
