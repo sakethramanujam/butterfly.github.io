@@ -11,6 +11,7 @@
     "material-ui-search-bar": "^0.4.2",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
+    "react-modal": "^3.6.1",
     "react-scripts": "^1.1.5"
   },
   "scripts": {
