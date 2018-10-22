@@ -9,6 +9,7 @@ import LoginBtn from './LoginBtn';
 import SearchComp from './SearchComp';
 import MapComp from './MapComp';
 import CaseCard from './CaseCard';
+import DetailDialog from './DetailDialog';
 import LandingComp from './LandingComp';
 
 const styles = theme => ({
@@ -27,10 +28,14 @@ class WebLayout extends Component {
         super(props);
         
         this.state = {
-            isLoggedIn: false
+            isLoggedIn: false,
+            open: false,
+            scroll: 'paper',
         };
         this.handleLogin = this.handleLogin.bind(this);
         this.handleLogout = this.handleLogout.bind(this);
+        this.handleOpen = this.handleOpen.bind(this);
+        this.handleClose = this.handleClose.bind(this);
     }
 
     handleLogin() {
@@ -38,6 +43,15 @@ class WebLayout extends Component {
     }
     handleLogout() {
         this.setState({isLoggedIn: false});
+    }
+
+    handleOpen(scroll) {
+        console.log("Opening")
+        this.setState({open: true, scroll});
+    }
+
+    handleClose() {
+        this.setState({open: false});
     }
 
     render() {
@@ -85,15 +99,16 @@ class WebLayout extends Component {
                             List of cases available in your location:
                         </Typography>
                         <div className="scroll-handle">
-                            <CaseCard/>
-                            <CaseCard/>
-                            <CaseCard/>
-                            <CaseCard/>
-                            <CaseCard/>
+                            <CaseCard onClick={this.handleOpen}/>
                         </div>
                     </Grid>
                 </Grid>)
                 }
+
+                <DetailDialog
+                    open={this.state.open}
+                    onClose={this.handleClose}
+                    scroll={this.state.scroll}/>
             </div>
         )
     }

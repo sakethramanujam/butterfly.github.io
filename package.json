@@ -34,5 +34,7 @@
     "node",
     "glitch",
     "express"
-  ]
+  ],
+  "proxy": "https://localhost:5000/"
+
 }
