@@ -22,7 +22,7 @@ export default class ShareDialog extends React.Component {
   };
 
   render() {
-    console.log(process.env);
+    // console.log(process.env);
     return (
       <div>
         <Dialog

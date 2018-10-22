@@ -4,11 +4,18 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 require('dotenv').config();
 const app = express();
+var router = express.Router();
+// app.use(cors());
 
-app.use(cors());
+
+router.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 
 app.use(bodyParser.json());
-// app.use('/get', );
+// app.get('/', (req, res)=> { return res.sendFile(__dirname + '/views/index.html')});
 // Database Config
 const db = process.env.MLAB_URI;
 const port = process.env.PORT || 5000;
@@ -33,8 +40,8 @@ app.post('/sendSMS', bodyParser.json(), (req, res) => {
     let SID = process.env.TWILIO_SID;
     let TOKEN = process.env.TWILIO_AUTH;
     let SENDER = process.env.TWILIO_SENDER;
-    
-    if(!SID || !TOKEN) {
+
+    if (!SID || !TOKEN) {
         return res.json({
             message: "No SID or TOKEN"
         });
@@ -42,17 +49,16 @@ app.post('/sendSMS', bodyParser.json(), (req, res) => {
 
     var client = require('twilio')(SID, TOKEN);
     client.sendMessage({
-        to: req.body.phNo,
-        from: SENDER,
-        body: "Your freind has sent you a case from Butterfly"
-    }, function(err, responseData) {
-        if(!err) {
-            res.json({
-                "From": responseData.from,
-                "Body": responseData.body
-            })
+        to: '+919985296699',
+        from: '+12678332104',
+        body: 'Jenny! Please give me another chance! <3'
+    }, function (err, message) {
+        if (err) {
+            console.error('Text failed because: ' + err.message);
+        } else {
+            console.log('Text sent! Message SID: ' + message.sid);
         }
-    })
+    });
 
 })
 

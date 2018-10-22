@@ -11,6 +11,7 @@ import MapComp from './MapComp';
 import CaseCard from './CaseCard';
 import DetailDialog from './DetailDialog';
 import LandingComp from './LandingComp';
+import axios from 'axios';
 
 const styles = theme => ({
     menuButton: {
@@ -31,11 +32,13 @@ class WebLayout extends Component {
             isLoggedIn: false,
             open: false,
             scroll: 'paper',
+            data: null,
         };
         this.handleLogin = this.handleLogin.bind(this);
         this.handleLogout = this.handleLogout.bind(this);
         this.handleOpen = this.handleOpen.bind(this);
         this.handleClose = this.handleClose.bind(this);
+        this.getData = this.getData.bind(this);
     }
 
     handleLogin() {
@@ -54,7 +57,21 @@ class WebLayout extends Component {
         this.setState({open: false});
     }
 
+    async getData() {
+        axios.request({
+            url: "https://cherry-salad.glitch.me/view",
+            method: "GET"
+        }).then((resp) => {
+            this.state.data= await resp.data;
+            console.log(resp.data);
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+
     render() {
+
+        this.getData();
         const { classes } = this.props;
         const isLoggedIn = this.state.isLoggedIn;
         const pos= {
@@ -71,6 +88,7 @@ class WebLayout extends Component {
         else {
             button = <LoginBtn onClick= {this.handleLogin}/>;
         }
+
 
         return (
             <div>
@@ -99,7 +117,15 @@ class WebLayout extends Component {
                             List of cases available in your location:
                         </Typography>
                         <div className="scroll-handle">
-                            <CaseCard onClick={this.handleOpen}/>
+                        {
+                            // this.state.data.forEach(element => {
+                            //     <CaseCard onClick={this.handleOpen} value-data={element}/>
+                            // })
+                            this.state.data.map((item, i) => {
+                                console.log("entered");
+                                return <CaseCard onClick={this.handleOpen} valueData={item}/>
+                            })
+                        }
                         </div>
                     </Grid>
                 </Grid>)

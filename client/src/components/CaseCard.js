@@ -16,8 +16,8 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import { TWILIO_AUTH, TWILIO_SID , TWILIO_SENDER} from './keys';
 import axios from 'axios';
 
-const accountSid = process.env.TWILIO_SID || TWILIO_SID; 
-const authToken = process.env.TWILIO_AUTH || TWILIO_AUTH;
+// const accountSid = process.env.TWILIO_SID || TWILIO_SID; 
+// const authToken = process.env.TWILIO_AUTH || TWILIO_AUTH;
 
 const styles = {
   card: { 
@@ -30,24 +30,31 @@ const styles = {
 };
 
 class CaseCard extends Component {
-  
-  state= {
-    open: false,
-    done: false,
-    err: false,
-  }
+
+  constructor(props) {
+    super(props);
+    
+    this.state = {
+      open: false,
+      done: false,
+      err: false,
+      valueData: null,
+    };
+    this.handleClose = this.handleClose.bind(this);
+    this.handleClickOpen = this.handleClickOpen.bind(this);
+}
   
   handleClickOpen = () => {
     this.setState({ open: true });
   };
   
   handleClose = () => {
-    this.setState({ open: false });
+    this.setState({ open: false, err: false, done: false });
   };
   
   sendSMS = () => {
     axios.request({
-      url: 'https://localhost:3000/sendSMS',
+      url: 'localhost:3000/sendSMS',
       method: 'POST',
       data: {
         phNo: "+919985296699"
@@ -62,13 +69,15 @@ class CaseCard extends Component {
   
   render() {
     const { classes } = this.props;
+    const { title, description, location, fund } = this.props.valueData; 
     return (
       <div>
       <Card className={classes.card}>
         <CardActionArea onClick={this.props.onClick}>
           <CardContent className={classes.textLeft}>
             <Typography gutterBottom variant="h5" component="h2">
-              Case 01
+              {/* {this.props.valueData.title} */}
+              Some Shitty title + {title}
             </Typography>
             <Typography component="p">
               The information of the case, i.e. the cause of donation
@@ -121,12 +130,12 @@ class CaseCard extends Component {
               <div>
               <DialogContent>
                 <DialogContentText>
-                    Error occured sending SMS to User !!!
+                    Error occured while sending SMS to User !!!
                   </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                  <Button onClick={this.handleClose} color="primary">
-                    Error
+                  <Button onClick={this.handleClose} color="secondary">
+                    Okay
                   </Button>
                 </DialogActions>
               </div>
@@ -158,6 +167,7 @@ class CaseCard extends Component {
 
 CaseCard.propTypes = {
   classes: PropTypes.object.isRequired,
+  valueData: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(CaseCard);

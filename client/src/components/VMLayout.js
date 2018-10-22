@@ -1,16 +1,65 @@
 import React, { Component } from 'react';
-import { Grid, CardContent } from '@material-ui/core';
+import { Grid, CardContent, withStyles } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
+import CaseCard from './CaseCard';
+import DetailDialog from './DetailDialog';
 
-export default class VMLayout extends Component {
+const styles = theme => ({
+    root: {
+      display: 'flex',
+    },
+    formControl: {
+      margin: theme.spacing.unit * 3,
+    },
+    group: {
+      margin: `${theme.spacing.unit}px 0`,
+    },
+  });
 
-    state = {
-        phNo: null,
-    };
+class VMLayout extends Component {
+
+    constructor(props) {
+        super(props);
+        
+        this.state = {
+            isLoggedIn: false,
+            open: false,
+            scroll: 'paper',
+            phNo: null,
+            defu: 'donate',
+            value: 'donate'
+        };
+        this.handleChange = this.handleChange.bind(this);
+        // this.handleLogout = this.handleLogout.bind(this);
+        this.handleOpen = this.handleOpen.bind(this);
+        this.handleClose = this.handleClose.bind(this);
+    }
+
+
+    handleChange = event => {
+        this.setState({ value: event.target.value, defu: event.target.value });
+      };
+
+      handleOpen(scroll) {
+        console.log("Opening")
+        this.setState({open: true, scroll});
+    }
+
+    handleClose() {
+        this.setState({open: false});
+    }
+
+    
 
     render() {
-        // const { classes } = this.props;
+        const { classes } = this.props;
         var URI = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=+91" + this.state.phNo;
         return (
             <div>
@@ -19,9 +68,32 @@ export default class VMLayout extends Component {
 
                             <Grid container spacing={24}>
                                 <Grid item xs={10}>
-                                    <Typography color="textSecondary">
-                                        Vending Machine UI Here...
-                                    </Typography>
+                                    <Grid container spacing={24}>
+                                        <Grid item xs={4}>
+                                        <FormControl component="fieldset" className={classes.formControl}>
+                                        <FormLabel component="legend">Options</FormLabel>
+                                        <RadioGroup
+                                            aria-label="Options"
+                                            name="options"
+                                            className={classes.group}
+                                            value={this.state.value}
+                                            onChange={this.handleChange}
+                                        >
+                                            <FormControlLabel value="donate" control={<Radio />} label="Donate" />
+                                            <FormControlLabel value="invest" control={<Radio />} label="Invest" />
+                                            <FormControlLabel
+                                            value="disabled"
+                                            disabled
+                                            control={<Radio />}
+                                            label="Request"
+                                            />
+                                        </RadioGroup>
+                                        </FormControl>
+                                        </Grid>
+                                        <Grid item xs={8}>
+                                        <CaseCard onClick={this.handleOpen}/>
+                                        </Grid>
+                                    </Grid>
                                 </Grid>
                                 <Grid item xs={2}>
                                     <Typography color="textSecondary">
@@ -32,7 +104,15 @@ export default class VMLayout extends Component {
                             </Grid>
                         </CardContent>
                     </Card>
+
+                    <DetailDialog
+                    open={this.state.open}
+                    onClose={this.handleClose}
+                    // scroll={this.state.scroll}
+                    />
             </div>
         )
     }
 }
+
+export default withStyles(styles)(VMLayout);

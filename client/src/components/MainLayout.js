@@ -6,7 +6,7 @@ import Grid from '@material-ui/core/Grid';
 
 export default class MainLayout extends Component {
     state = {
-        version: true,
+        version: false,
     };
 
     handleToggle = () => {

@@ -21,7 +21,7 @@ export default class MapComp extends Component {
     this.map = new MapboxGl.Map({
       container: this.container,
       center: [lat, lng],
-      style: "mapbox://styles/mapbox/light-v9",
+      style: "mapbox://styles/mapbox/dark-v9",
       zoom: 14
     });
 
