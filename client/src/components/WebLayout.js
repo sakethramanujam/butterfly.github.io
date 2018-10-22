@@ -57,20 +57,26 @@ class WebLayout extends Component {
         this.setState({open: false});
     }
 
-    async getData() {
+    getData() {
         axios.request({
             url: "https://cherry-salad.glitch.me/view",
             method: "GET"
         }).then((resp) => {
-            this.state.data= await resp.data;
+            this.state.data = resp.data;
             console.log(resp.data);
         }).catch(err => {
             console.log(err);
         })
+
     }
 
+    componentWillUpdate(){
+        // setTimeout(() => {
+        //     this.getData() 
+        // }, 10000);
+    }
+    
     render() {
-
         this.getData();
         const { classes } = this.props;
         const isLoggedIn = this.state.isLoggedIn;
@@ -88,7 +94,6 @@ class WebLayout extends Component {
         else {
             button = <LoginBtn onClick= {this.handleLogin}/>;
         }
-
 
         return (
             <div>
@@ -118,12 +123,8 @@ class WebLayout extends Component {
                         </Typography>
                         <div className="scroll-handle">
                         {
-                            // this.state.data.forEach(element => {
-                            //     <CaseCard onClick={this.handleOpen} value-data={element}/>
-                            // })
                             this.state.data.map((item, i) => {
-                                console.log("entered");
-                                return <CaseCard onClick={this.handleOpen} valueData={item}/>
+                                return <CaseCard key={i} onClick={this.handleOpen} valueData={item}/>
                             })
                         }
                         </div>

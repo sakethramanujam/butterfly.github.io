@@ -46,6 +46,7 @@ app.post('/sendSMS', bodyParser.json(), (req, res) => {
             message: "No SID or TOKEN"
         });
     }
+    
 
     var client = require('twilio')(SID, TOKEN);
     client.sendMessage({

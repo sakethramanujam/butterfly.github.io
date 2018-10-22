@@ -40,6 +40,10 @@
   padding: 0 !important;
 }
 
+.MuiCardContent-root-300:last-child {
+  padding-bottom: 0px !important;
+}
+
 .Map {
   padding-top: 4px;
   position: relative !important;

@@ -13,7 +13,6 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { TWILIO_AUTH, TWILIO_SID , TWILIO_SENDER} from './keys';
 import axios from 'axios';
 
 // const accountSid = process.env.TWILIO_SID || TWILIO_SID; 
@@ -69,7 +68,9 @@ class CaseCard extends Component {
   
   render() {
     const { classes } = this.props;
-    const { title, description, location, fund } = this.props.valueData; 
+    // const { title, description, location, fund } = this.props.valueData;
+    const { valueData } = this.props; 
+    console.log(this.props);
     return (
       <div>
       <Card className={classes.card}>
@@ -77,7 +78,8 @@ class CaseCard extends Component {
           <CardContent className={classes.textLeft}>
             <Typography gutterBottom variant="h5" component="h2">
               {/* {this.props.valueData.title} */}
-              Some Shitty title + {title}
+              {/* Some title {valueData.title} */}
+              title
             </Typography>
             <Typography component="p">
               The information of the case, i.e. the cause of donation
@@ -167,7 +169,7 @@ class CaseCard extends Component {
 
 CaseCard.propTypes = {
   classes: PropTypes.object.isRequired,
-  valueData: PropTypes.object.isRequired,
+  // valueData: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(CaseCard);
