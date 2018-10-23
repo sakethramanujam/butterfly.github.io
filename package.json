@@ -2,9 +2,9 @@
   "//1": "describes your app and its dependencies",
   "//2": "https://docs.npmjs.com/files/package.json",
   "//3": "updating this file will download and update your packages",
-  "name": "hello-express",
+  "name": "project-butterfly",
   "version": "0.0.1",
-  "description": "A simple Node app built on Express, instantly up and running.",
+  "description": "A complex Node app built on ExpressJS & ReactJS.",
   "main": "server.js",
   "scripts": {
     "client-install": "npm install --prefix client",
@@ -35,4 +35,5 @@
     "glitch",
     "express"
   ]
+
 }
